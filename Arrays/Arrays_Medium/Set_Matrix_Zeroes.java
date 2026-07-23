@@ -9,7 +9,9 @@ public class Set_Matrix_Zeroes {
         int[][] arr2 = {{1,1,1},{1,0,1},{1,1,1}};
         System.out.println(Arrays.deepToString(better(arr2)));
         int[][] arr3 = {{1,1,1},{1,0,1},{1,1,1}};
-        System.out.println(Arrays.deepToString(optimized(arr3)));
+        System.out.println(Arrays.deepToString(optimized(arr3)));//2 variable
+        int[][] arr4 = {{1,1,1},{1,0,1},{1,1,1}};
+        System.out.println(Arrays.deepToString(optimized2(arr4)));// 1 variable
 
     }
     public static int[][] bruteforce(int[][] mat){
@@ -59,20 +61,13 @@ public class Set_Matrix_Zeroes {
 
     }
     public static int[][] optimized(int[][] mat){
+        // 2 variables striver site
         int n = mat.length;
-        int m = mat.length;
+        int m = mat[0].length;
         boolean firstRow = false;
         boolean firstCol = false;
-        for(int i=1; i<n;i++){
-            for(int j=1; j<m; j++){
-                if(mat[i][j] == 0){
-                    mat[0][j] = 0;
-                    mat[i][0] = 0;
-                }
-            }
-        }
-        for(int i=0; i<m; i++){
-            if(mat[0][i] == 0){
+        for(int j=0; j<m; j++){
+            if(mat[0][j] == 0){
                 firstRow = true;
                 break;
             }
@@ -81,6 +76,14 @@ public class Set_Matrix_Zeroes {
             if(mat[i][0] == 0){
                 firstCol = true;
                 break;
+            }
+        }
+        for(int i=1; i<n;i++){
+            for(int j=1; j<m; j++){
+                if(mat[i][j] == 0){
+                    mat[0][j] = 0;
+                    mat[i][0] = 0;
+                }
             }
         }
         for(int i=1; i<n; i++){
@@ -92,6 +95,33 @@ public class Set_Matrix_Zeroes {
             for(int i=0; i<m; i++) mat[0][i] = 0;
         }
         if(firstCol){
+            for(int i=0; i<n; i++) mat[i][0] = 0;
+        }
+        return mat;
+    }
+    public static int[][] optimized2(int[][] mat){
+        // 1 variable col0 striver yt
+        int n = mat.length;
+        int m = mat[0].length;
+        int col0 = 1;
+        for(int i=0; i<n;i++){
+            for(int j=0; j<m; j++){
+                if(mat[i][j] == 0){
+                    mat[i][0] = 0;
+                    if(j !=0) mat[0][j] = 0;
+                    else col0 = 0;
+                }
+            }
+        }
+        for(int i=1; i<n; i++){
+            for(int j=1; j<m; j++){
+                if(mat[0][j] == 0 || mat[i][0]==0) mat[i][j] = 0;
+            }
+        }
+        if(mat[0][0] == 0){
+            for(int i=0; i<m; i++) mat[0][i] = 0;
+        }
+        if(col0 == 0){
             for(int i=0; i<n; i++) mat[i][0] = 0;
         }
         return mat;
