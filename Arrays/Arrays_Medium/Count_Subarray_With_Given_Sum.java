@@ -21,4 +21,8 @@ public class Count_Subarray_With_Given_Sum {
         }
         return cnt;
     }
+    public static int better(int[] arr, int k){
+        int cnt=0;
+        return cnt;
+    }
 }
