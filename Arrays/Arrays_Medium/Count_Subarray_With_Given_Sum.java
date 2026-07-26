@@ -5,11 +5,24 @@ public class Count_Subarray_With_Given_Sum {
         int[] arr = {1,2,3};
         int k = 3;
         System.out.println(bruteforce(arr,k));
-        //System.out.println(better(arr));
+        System.out.println(better(arr,k));
         //System.out.println(optimized(arr));
 
     }
     public static int bruteforce(int[] arr, int k){
+        int cnt=0;
+        for(int i=0; i<arr.length; i++){
+            for(int j=i;j<arr.length; j++){
+                int sum =0;
+                for(int l=i; l<=j; l++){
+                    sum += arr[l];
+                }
+                if(sum == k) cnt++;
+            }
+        }
+        return cnt;
+    }
+    public static int better(int[] arr, int k){
         int cnt = 0;
         for(int i=0; i<arr.length; i++){
             int sum = 0;
@@ -21,8 +34,5 @@ public class Count_Subarray_With_Given_Sum {
         }
         return cnt;
     }
-    public static int better(int[] arr, int k){
-        int cnt=0;
-        return cnt;
-    }
+    
 }
