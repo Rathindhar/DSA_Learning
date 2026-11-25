@@ -15,9 +15,9 @@ public class Longest_Consecutive_Sequence {
         int n = arr.length;
         int longest = 1;
         for(int i=0; i<n; i++){
-            int x =arr[i];
+            int x =arr[i]+1;
             int cnt =1;
-            while(linearSearch(arr,x+1)){
+            while(linearSearch(arr,x)){
                 x+=1;
                 cnt+=1;
             }
